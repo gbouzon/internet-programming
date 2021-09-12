@@ -10,6 +10,14 @@ Fall 2021. Repository for labs, assignments &amp; projects in internet programmi
     Package <b>BouzonGiulianaAssignment01</b> contains my solution for Assignment 1 (.png, main, form). <br>
 </p>
 
+### 2. Assignment 2 - Yoko:
+
+<p> 
+    Package <b>css</b> contains .css files for Yoko's Kitchen website. <br>
+    Package <b>images</b> contains images for Yoko's Kitchen website. <br>
+    File <b>class2-assignment.html</b> contains html code for Yoko's Kitchen website. <br>
+</p>
+
 ### 2. Lab 1:
 
 <p> 

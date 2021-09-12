@@ -18,7 +18,7 @@ Fall 2021. Repository for labs, assignments &amp; projects in internet programmi
     File <b>class2-assignment.html</b> contains html code for Yoko's Kitchen website. <br>
 </p>
 
-### 2. Lab 1:
+### 3. Lab 1:
 
 <p> 
     Package <b>Forms</b> contains exercises done in Ronald's lab (form concepts). <br>

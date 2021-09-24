@@ -1,0 +1,101 @@
+player + dealer
+player decides when to get additional cards
+"draw a new card" or "hold" - two buttons
+if total is above 21, dealer wins, game ends.
+if total is less or equal to 21, player goes to dealer (when player decides to stop)
+
+when player finishes, dealer's turn
+
+dealer does not have a choice
+whenever sum total of his cards is 16 or below, must draw an additional card
+whenever sum total of his card is 17 or above, must top.
+total of above 21, counts as loss
+
+aces 11 points AT ALL TIMES
+face cards 10 points (king, queen, jack)
+others -whatever number on the card (3 of diamonds - 3 points)
+
+NOT ALLOWED TO MODIFY .HTML (use what's already there)
+
+each player and dealer have two image elements (first two card at the beg. of the game)
+
+when player draws a new card = third card (from game total)
+add a third card element (javaScript not html, use script from lab 3)
+same thing applies to the dealer
+
+create functions having the defined names in the .html doc
+javascript file is already added to the .html, name is game.js
+
+cards are assigned randomly (use generateRandomNumber() method from lab 1)
+ONLY ONE PLAYER AND ONE DEALER
+
+every hand is a game.
+when we start a new game (start a new hand), we reshuffle the deck, start from the beg., fresh 52 cards
+
+img folder has ALL 52 cards as images, DO NOT CHANGE, MODIFY, MOVE.
+not allowed to TOUCH ANYTHING IN THAT FOLDER pls and thank
+
+names help create the images = return of randomNumberGenerator() method + "png" is the name of your image
+
+DUPLICATE CARDS ARE NOT ALLOWED = remove the card from the deck (remove as an option from randomNumberGenerator())
+
+SCORES MUST BE UPDATED dealerScore, playerScore sections.
+update using id(playerScore, dealerScore) = add the card number to the existing number (beside row "Player:") - column in a table
+once update is done, verify score. Once score is >=21, all buttons have to be disabled (not allowed to ask for a new card)
+game is over so player should no longer be able to make decisions.
+
+NO DATA PASSES FROM ONE GAME TO THE NEXT (AT THE BEG OF EACH GAME, ALL DATA FROM PREVIOUS GAMES ARE COMPLETELY ERASED)
+
+BUTTONS
+
+when the hold button is pressed, it automatically becomes the dealer's turn.
+this only happens IF the player has not lost (dealer already won so there's no point in continuing the game)
+as soon as the hold button is pressed, it must become disabled (player should not be able to repress hold button NOR to press draw button)
+
+when dealer finishes his turn, no one has lost.
+the game ends once dealer finishes his turn
+then compare dealer's score with player's score to determine who has won
+ADD "has won the game" to the player/dealer section
+example: Player + "has won the game" OR dealer + "has won the game"
+DO NOT REPLACE THE CONTENT, ADD TO THE CONTENT
+highlight this in green = change background to green
+
+DEALER DOES NOT HAVE CHOICES, HIS ACTIONS ARE PREDETERMINED. HE HAS TO DRAW IF IT'S 16 OR LESS AND CAN'T IF IT'S 17 OR MORE
+- no buttons for dealer.
+
+player keeps drawing until he decides to hold or until he loses (not a by turn game, the dealer and the player each get one turn).
+
+DO NOT TOUCH CSS OR HTML OR ANY OTHER FOLDER THERE. ALL YOU'RE ALLOWED TO TOUCH IS GAME.JS
+
+tips:
+- do not create objects where none are needed.
+- one object that stands out with a strong purpose for this game
+
+
+DO PSEUDOCODE FIRST--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title> Contact </title>
+    <link type = "image/x-icon" rel = "icon" href = "images/icon.png">
+    <link type = "text/css" rel = "stylesheet" href = "css/core.css">
+    <link type = "text/css" rel = "stylesheet" href = "css/contact.css">
+  </head>
+
+  <body>
+    <div class = "wrapper">
+      <header>
+        <h1></h1>
+        <nav>
+          <ul>
+            <li><a href = "home.html">home</a></li>
+            <li><a href = "classes.html">classes</a></li>
+            <li><a href = "catering.html">catering</a></li>
+            <li><a href = "about.html">about</a></li>
+            <li><a href = "contact.html">contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class = "map">
+        <h2 id = "map-heading">How To Find Us:</h2>
+        <a href = "https://www.google.com/maps/place/27+Redchurch+St,+London+E2+7DJ,+UK/@51.5244532,-0.0778168,17z/data=!3m1!4b1!4m5!3m4!1s0x48761cb7697a1c4b:0xbc0dacf3b15e53d5!8m2!3d51.5244532!4d-0.0756281">
+          <img width = "80%" src = "images/map.jpg">
+        </a>
+      </div>
+
+      <section class = "contact">
+        <h2>Contact</h2>
+        <p>
+          Yoko's Kitchen <br>
+          27 Redchurch Street <br>
+          Shoreditch <br>
+          London E2 7DP <br>
+          +44 20 7946 0253 <br>
+        </p>
+      </section>
+      <!--
+
+      -->
+      <div class = "container">
+        <form action = "contact.php" method = "GET">
+      
+          <label>First Name</label>
+          <input type = "text" id = "fname" name = "firstname" placeholder = "Your name..">
+      
+          <label>Last Name</label>
+          <input type = "text" id = "lname" name = "lastname" placeholder = "Your last name..">
+
+          <label>Email</label>
+          <input type = "text" id = "email" name = "email" placeholder = "Your email..">
+      
+          <label>Message</label>
+          <textarea id = "message" name = "subject" placeholder = "Write something.." rows = "20"></textarea>
+      
+          <input type = "submit" value = "Submit">
+      
+        </form>
+      </div> 
+
+      <footer>&copy; 2011 Yoko's Kitchen</footer>
+    </div>
+
+  </body>
+</html>

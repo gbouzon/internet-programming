@@ -9,6 +9,7 @@ Fall 2021. Repository for labs, assignments &amp; projects in internet programmi
     Package <b>Assignment 01 - Intro to HTML</b> contains my solution for Assignment 1 (.png, main, form, .docx). <br>
     Package <b>Assignment 02 - Yoko</b> contains my solution for Assignment 2 (css, html, images). <br>
     Package <b>Assignment 03 - Yoko Complete Website</b> contains my solution for Assignment 3 (css, html, images). <br>
+    Package <b>Assignment 04 - Blackjack</b> contains my solution for Assignment 4 (notes, instructions, html, css, images and js script). <br>
 </p>
 
 ### 2. Labs:

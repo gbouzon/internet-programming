@@ -8,7 +8,7 @@ when player finishes, dealer's turn
 
 dealer does not have a choice
 whenever sum total of his cards is 16 or below, must draw an additional card
-whenever sum total of his card is 17 or above, must top.
+whenever sum total of his card is 17 or above, must stop.
 total of above 21, counts as loss
 
 aces 11 points AT ALL TIMES
@@ -50,7 +50,7 @@ BUTTONS
 
 when the hold button is pressed, it automatically becomes the dealer's turn.
 this only happens IF the player has not lost (dealer already won so there's no point in continuing the game)
-as soon as the hold button is pressed, it must become disabled (player should not be able to repress hold button NOR to press draw button)
+as soon as the hold button is pressed, it must become disabled (player should not be able to re press hold button NOR to press draw button)
 
 when dealer finishes his turn, no one has lost.
 the game ends once dealer finishes his turn

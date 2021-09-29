@@ -36,8 +36,6 @@ function createCardElement(card, id, index) {
 
 function deal() {
     //deals player two random cards
-    //TODO 3: BUG - stacked method call screws up recursion in generateRandomCard()
-    //image src becomes undefined, only when method goes to else statement, pls check
 
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     createCardElement(generateRandomCard(), "player", ++playerIndex);
@@ -67,7 +65,7 @@ function generateRandomCard(min = 1, max = 52) {
         return card;
     }
     else 
-        generateRandomCard(); //check stacked method call (deal())
+        return generateRandomCard(); //check stacked method call (deal())
 }
 
 //TODO 6: implement methods

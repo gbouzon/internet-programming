@@ -31,12 +31,11 @@ function deal() {
     //deals player two random cards
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     createCardElement(generateRandomCard(), "player", ++playerIndex);
-    //updating scores, make method for this
+    //updating scores
     playerScore += getCardValue(generatedCards[0]);
     playerScore += getCardValue(generatedCards[1]);
-    document.getElementById("playerLabel").innerHTML += ": " + playerScore + " points.";
+    document.getElementById("playerLabel").innerHTML = "Player: " + playerScore + " points.";
     isValid(playerScore);
-    
 
     //TODO 4: if time allows: make last card added face down for dealer
     //deals dealer two random cards
@@ -45,12 +44,8 @@ function deal() {
     //updating scores, ^^
     dealerScore += getCardValue(generatedCards[2]);
     dealerScore += getCardValue(generatedCards[3]);
-    document.getElementById("dealerLabel").innerHTML += ": " + dealerScore + " points.";
+    document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
     isValid(dealerScore);
-
-    //verify();
-    //verify, if > 21 lose, if == 21 win, if < 21 continue 
-    //request player card if continue
 }
 
 /*
@@ -68,18 +63,22 @@ function generateRandomCard(min = 1, max = 52) {
         return generateRandomCard();  
 }
 
-//TODO 6: implement methods
-
+/*
+    Called when "Draw 1 more card" button is pressed
+*/
 function requestPlayerCard() {
     //called when draw 1 more card button is pressed
     var card = generateRandomCard();
     createCardElement(card, "player", ++playerIndex);
     playerScore += getCardValue(card);
     //displayScore
-    document.getElementById("playerLabel").innerHTML += ": " + playerScore + " points.";
+    document.getElementById("playerLabel").innerHTML = "Player: " + playerScore + " points.";
     isValid(playerScore);
 }
 
+/*
+    Disables buttons draw and hold.
+*/
 function disableButtons() {
     document.getElementById("btnDraw").disabled = true;
     document.getElementById("btnHold").disabled = true;
@@ -93,19 +92,11 @@ function completeDealerHand() {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
         //display score
-        document.getElementById("dealerScore").innerHTML += ": " + dealerScore + " points.";
+        document.getElementById("dealerScore").innerHTML = "Dealer: " + dealerScore + " points.";
         isValid(dealerScore);
     }
     if (dealerScore <= 21)
         compareScores();
-
-    
-    
-    //draw another card and add to total
-    //verify()
-
-    //else if total >= 27
-    //break and compare scores
 }
 
 function isValid(total) {
@@ -113,11 +104,7 @@ function isValid(total) {
     else if (total > 21) return lose(total);
     else if (total === 21) return win(total);
     else compareScores();
-    //compare hands?????????
-    //what happens with ties?
-    //total < 21 return true
-    //total > 21 return lose(total owner)
-    //total == 21 return win(total owner)
+    //change it a bit and add condition for ties
 }
 
 function lose(total) {
@@ -128,12 +115,12 @@ function lose(total) {
 }
 
 function win(total) {
-    if (total === playerScore)
-        document.getElementById("playerLabel").innerHTML += "has won the game";
-    else if (total === dealerScore)
-        document.getElementById("dealerLabel").innerHTML += "has won the game";
-
     disableButtons();
+
+    if (total === playerScore)
+        document.getElementById("playerLabel").innerHTML = "Player has won the game";
+    else if (total === dealerScore)
+        document.getElementById("dealerLabel").innerHTML = "Dealer has won the game"; 
 }
 
 function compareScores() {
@@ -141,7 +128,7 @@ function compareScores() {
         return win(playerScore);
     else if ((21 - dealerScore) < (21 - playerScore))
         return win(dealerScore);
-    else console.log("tie"); //do something for this
+    else console.log("tie"); //do something for ties
 }
 
 /*
@@ -169,7 +156,6 @@ function getCardValue(card) {
     else
         return (card % 13); //everything else
 }
-
 
 //for debugging purposes
 console.log(generatedCards);

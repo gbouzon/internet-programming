@@ -24,6 +24,6 @@ Javascript labs & demos done in class
 ### 4. Lab 04 - Canvas:
 
 <p> 
-    Demo on objects part 2: constructors.
+    Demo on objects part 2: constructors. <br>
     Demo on using canvas - drawing circles, rectangles, lines as well as animating objects (by redrawing them at an interval).
 </p>

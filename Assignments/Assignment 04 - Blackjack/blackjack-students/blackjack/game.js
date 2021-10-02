@@ -1,7 +1,7 @@
 /////////////////////// FIX YOUR MESS PLS AND THANK /////////////////////////
 //TODO 1: check if you really need all these methods
 
-//initializing variables, init() later on if too long 
+//initializing variables
 var generatedCards = []; //to store cards already in game
 
 var playerIndex, dealerIndex; //stores nb of cards dealt for each
@@ -32,8 +32,11 @@ function deal() {
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     //updating scores
+    //TODO 2: make this more efficient if you got some time
     playerScore += getCardValue(generatedCards[0]);
     playerScore += getCardValue(generatedCards[1]);
+
+    //TODO 3: try finding a way to += instead of resetting every time
     document.getElementById("playerLabel").innerHTML = "Player: " + playerScore + " points.";
     isValid(playerScore);
 
@@ -92,7 +95,7 @@ function completeDealerHand() {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
         //display score
-        document.getElementById("dealerScore").innerHTML = "Dealer: " + dealerScore + " points.";
+        document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
         isValid(dealerScore);
     }
     if (dealerScore <= 21)
@@ -107,6 +110,7 @@ function isValid(total) {
     //change it a bit and add condition for ties
 }
 
+//TODO 5: make this better cause bleh
 function lose(total) {
     if (total === playerScore)
         return win(dealerScore);
@@ -128,7 +132,8 @@ function compareScores() {
         return win(playerScore);
     else if ((21 - dealerScore) < (21 - playerScore))
         return win(dealerScore);
-    else console.log("tie"); //do something for ties
+    //for ties, not a requirement to do anything but like pls you got enough time
+    else console.log("tie"); 
 }
 
 /*
@@ -146,7 +151,7 @@ function isFaceCard(card) {
 }
 
 /*
-  Updates score depending on card
+  Retrieves the value of the corresponding card
 */
 function getCardValue(card) {
     if ((card - 1) % 13 == 0) //ace 

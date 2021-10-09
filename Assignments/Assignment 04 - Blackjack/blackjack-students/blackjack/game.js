@@ -121,10 +121,14 @@ function lose(total) {
 function win(total) {
     disableButtons();
 
-    if (total === playerScore)
+    if (total === playerScore) {
         document.getElementById("playerLabel").innerHTML = "Player has won the game";
-    else if (total === dealerScore)
+        document.getElementById("playerLabel").style.color = "green"; 
+    }
+    else if (total === dealerScore) {
         document.getElementById("dealerLabel").innerHTML = "Dealer has won the game"; 
+        document.getElementById("dealerLabel").style.color = "green"; 
+    }
 }
 
 function compareScores() {
@@ -132,8 +136,39 @@ function compareScores() {
         return win(playerScore);
     else if ((21 - dealerScore) < (21 - playerScore))
         return win(dealerScore);
-    //for ties, not a requirement to do anything but like pls you got enough time
-    else console.log("tie"); 
+    else return tie();
+}
+
+function removeImgs(id, index) {
+  //trial 1, refactor later
+  while (index > 1) {
+    var img = document.getElementById(id + index);
+    img.remove();
+    index--;
+  }
+}
+
+function tie() {
+  //trial 1, refactor later
+  //deleting all player's cards
+  removeImgs("player", playerIndex);
+  //deleting all dealer's cards
+  removeImgs("dealer", dealerIndex);
+  
+  //generate one more card for each and the card with the highest value will define the winner
+  var playerCard = generateRandomCard();
+  var dealerCard = generateRandomCard();
+
+  //player
+  document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");
+  playerScore = getCardValue(playerCard);
+  document.getElementById("playerLabel").innerHTML = "Dealer: " + playerScore + " points.";
+  //dealer
+  document.getElementById("dealer1").setAttribute("src", "img/" + dealerCard + ".png");
+  dealerScore = getCardValue(dealerCard);
+  document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
+  
+  return compareScores();
 }
 
 /*

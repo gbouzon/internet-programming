@@ -1,5 +1,4 @@
-/////////////////////// FIX YOUR MESS PLS AND THANK /////////////////////////
-//TODO 1: check if you really need all these methods
+//TODO: REFACTOR & DELETE LOSE() METHOD
 
 //initializing variables
 
@@ -10,54 +9,63 @@ var generatedCards = [];
 var playerIndex, dealerIndex;
 playerIndex = dealerIndex = 0;
 
+//to store score
 var dealerScore, playerScore;
 dealerScore = playerScore = 0;
 
-/*
-  Creates an image element (where needed) and displays the corresponding card.
-*/
+/** 
+ * Creates an image element (where needed) and displays the corresponding card.
+ * @param {number} card - the number generated from the 52-card deck.
+ * @param {string} id - "player" or "dealer".
+ * @param {number} index - number of cards dealt for specified player.
+ * @returns {void}
+ */
 function createCardElement(card, id, index) {
     if (index > 2) { 
-        //creating a new image element to add next card
+        //creating a new image element to add next card.
         var newImg = document.createElement("img");
-        //setting the id to the current index + 1
+        //setting the img id to id + index (eg. player1, dealer1).
         newImg.setAttribute("id", id + index);
-        //adding image to the page
+        //adding image to the page.
         document.getElementById(id + "Hand").appendChild(newImg);  
     }
-    //console.log("image added:" + document.getElementById(id + "Hand").innerHTML);
     document.getElementById(id + index).setAttribute("src", "img/" + card + ".png");
-    document.getElementById(id + index).setAttribute("width", "107");
-    document.getElementById(id + index).setAttribute("height", "98");  
 }
 
+/**
+ * Generates two random cards for the player and two random cards for the dealer.
+ * Updates scores and checks if anyone has won/lost the game yet (> or == 21).
+ * @returns {void}
+ */
 function deal() {
-    //deals player two random cards
+    //deals player two random cards.
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     createCardElement(generateRandomCard(), "player", ++playerIndex);
-    //updating scores
+
+    //updating player score.
     playerScore += getCardValue(generatedCards[0]);
     playerScore += getCardValue(generatedCards[1]);
+    document.getElementById("playerScore").innerHTML = "Score: " + playerScore + " points.";
+    isScoreValid(playerScore);
 
-    //TODO 3: try finding a way to += instead of resetting every time
-    document.getElementById("playerLabel").innerHTML = "Player: " + playerScore + " points.";
-    isValid(playerScore);
-
-    //TODO 4: if time allows: make last card added face down for dealer
-    //deals dealer two random cards
+    //deals dealer two random cards.
     createCardElement(generateRandomCard(), "dealer", ++dealerIndex);
     createCardElement(generateRandomCard(), "dealer", ++dealerIndex);
-    //updating scores, ^^
+
+    //updating dealer score.
     dealerScore += getCardValue(generatedCards[2]);
     dealerScore += getCardValue(generatedCards[3]);
-    document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
-    isValid(dealerScore);
+    document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
+    isScoreValid(dealerScore);
 }
 
-/*
-  Generates a random card from a 52-card deck
-  If the card has already been dealt, generate another one.
-*/
+/** 
+ * Generates a random card from a 52-card deck.
+ * If the card has already been dealt, generate another one.
+ * @param {number} min - the minimum value of the generated card.
+ * @param {number} max - the maximum value of the generate card.
+ * @returns the number corresponding to a card in the deck.
+ */
 function generateRandomCard(min = 1, max = 52) {
     var card = Math.floor((Math.random() * (max - min + 1)) + min);
 
@@ -69,73 +77,56 @@ function generateRandomCard(min = 1, max = 52) {
         return generateRandomCard();  
 }
 
-/*
-    Called when "Draw 1 more card" button is pressed
-*/
+/** 
+ * Called when "Draw 1 more card" button is pressed.
+ * Generates another card for the player and updates related functionalities.
+ * @returns {void}
+ */
 function requestPlayerCard() {
-    //called when draw 1 more card button is pressed
     var card = generateRandomCard();
     createCardElement(card, "player", ++playerIndex);
     playerScore += getCardValue(card);
     //displayScore
-    document.getElementById("playerLabel").innerHTML = "Player: " + playerScore + " points.";
-    isValid(playerScore);
+    document.getElementById("playerScore").innerHTML = "Score: " + playerScore + " points.";
+    isScoreValid(playerScore);
 }
 
-/*
-    Disables buttons draw and hold.
-*/
+/** 
+ * Disables buttons draw and hold.
+ * @returns {void}
+ */
 function disableButtons() {
     document.getElementById("btnDraw").disabled = true;
     document.getElementById("btnHold").disabled = true;
 }
 
+/**
+ * Called when button "hold" is pressed.
+ * Generates another card for dealer while score <= 16 and updates related functionalities.
+ * Once dealer has either reached 17+, lost or won, scores are compared.
+ * @returns {void}
+ */
 function completeDealerHand() {
-    var card = generateRandomCard();
-    //disable buttons
     disableButtons();
+    var card = generateRandomCard();
+
     if (dealerScore <= 16) {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
-        //display score
-        document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
+        document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
         completeDealerHand();
     }
     else if (dealerScore <= 21)
         compareScores();
 
-    isValid(dealerScore);
+    isScoreValid(dealerScore);
 }
 
-function isValid(total) {
-    if (total < 21) return true;
-    else if (total > 21) return lose(total);
-    else if (total === 21) return win(total);
-    else compareScores();
-    //change it a bit and add condition for ties
-}
-
-//TODO 5: make this better cause bleh
-function lose(total) {
-    if (total === playerScore)
-        return win(dealerScore);
-    else if (total === dealerScore)
-        return win(playerScore);
-}
-
-function win(total) {
-    disableButtons();
-
-    if (total === playerScore) {
-        document.getElementById("playerLabel").innerHTML = "Player has won the game";
-        document.getElementById("playerLabel").style.color = "green"; 
-    }
-    else if (total === dealerScore) {
-        document.getElementById("dealerLabel").innerHTML = "Dealer has won the game"; 
-        document.getElementById("dealerLabel").style.color = "green"; 
-    }
-}
-
+/**
+ * Compares scores and declares winner whoever has the score closer (but not above) 21.
+ * Deals with ties in case one occurs.
+ * @returns a win or a tie.
+ */
 function compareScores() {
     if ((21 - playerScore) < (21 - dealerScore))
         return win(playerScore);
@@ -144,43 +135,95 @@ function compareScores() {
     else return tie();
 }
 
-function removeImgs(id, index) {
-    for (var i = index; i > 1; i--) {
-        console.log("test" + id + i);
-        document.getElementById(id + i).remove();
+/**
+ * Checks if the score is still valid (< 21).
+ * @param {number} score - the score to be checked (either the player's or the dealer's).
+ * @returns true if score < 21 and a lose/win if not.
+ */
+function isScoreValid(score) {
+    if (score < 21) return true;
+    else if (score > 21) return lose(score);
+    else if (score === 21) return win(score);
+}
+
+/**
+ * **Refactor & delete this method pls.**
+ * Checks which player has the losing score.
+ * @param {number} score - the losing score.
+ * @returns a win for the player who doesn't have the losing score.
+ */
+function lose(score) {
+    if (score === playerScore)
+        return win(dealerScore);
+    else if (score === dealerScore)
+        return win(playerScore);
+}
+
+/**
+ * Checks which player has the winning score and updates related functionalities.
+ * @param {number} score - the winning score to be checked (either the player's or the dealer's).
+ * @return {void}
+ */
+function win(score) {
+    disableButtons();
+
+    if (score === playerScore) {
+        document.getElementById("playerLabel").innerHTML += " has won the game";
+        document.getElementById("playerLabel").style.color = "green"; 
+    }
+    else if (score === dealerScore) {
+        document.getElementById("dealerLabel").innerHTML += " has won the game"; 
+        document.getElementById("dealerLabel").style.color = "green"; 
     }
 }
 
+/**
+ * Removes all but one images from the specified HTML element.
+ * @param {string} id - "player" or "dealer"
+ * @param {number} index - number of cards dealt for specified player.
+ * @return {void}
+ */
+function removeImgs(id, index) {
+    for (var i = index; i > 1; i--) 
+        document.getElementById(id + i).remove();
+}
+
+/** 
+ * Deals with ties.
+ * Deletes all previous cards and generates one more for each player.
+ * The player with the highest card (< 21) is the winner.
+ * @returns compareScores() - checks which card is the highest.
+ */
 function tie() {
-  //trial 1, refactor later
   //deleting all player's cards
   removeImgs("player", playerIndex);
+
   //deleting all dealer's cards
   removeImgs("dealer", dealerIndex);
 
-  
-  
-  //generate one more card for each and the card with the highest value will define the winner
+  //generate one more card for each 
   var playerCard = generateRandomCard();
-  console.log(playerCard);
   var dealerCard = generateRandomCard();
-  console.log(dealerCard);
 
   //player
   document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");
   playerScore = getCardValue(playerCard);
-  document.getElementById("playerLabel").innerHTML = "Dealer: " + playerScore + " points.";
+  document.getElementById("playerScore").innerHTML = "Score: " + playerScore + " points.";
+
   //dealer
   document.getElementById("dealer1").setAttribute("src", "img/" + dealerCard + ".png");
   dealerScore = getCardValue(dealerCard);
-  document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
+  document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
   
+  //check which card is closer to 21
   return compareScores();
 }
 
-/*
-  Checks if a given card is a face card (J, Q, K)
-*/
+/** 
+ * Checks if a given card is a face card (J, Q, K).
+ * @param {number} card - the number generated from the 52-card deck.
+ * @returns true if the card is a J, Q or K. False if otherwise.
+ */
 function isFaceCard(card) {
     if ((card - 11) % 13 == 0)
         return true;
@@ -192,17 +235,17 @@ function isFaceCard(card) {
     return false;
 }
 
-/*
-  Retrieves the value of the corresponding card
-*/
+/** 
+ * Retrieves the value of the corresponding card according to specific rules.
+ * Aces: 11 points, Face cards: 10 points, others: corresponding number.
+ * @param {number} card - the number generated from the 52-card deck.
+ * @returns the integer value of the card.
+ */
 function getCardValue(card) {
-    if ((card - 1) % 13 == 0) //ace 
+    if ((card - 1) % 13 == 0) //aces 
         return 11;
     else if (isFaceCard(card)) //face cards
         return 10;
     else
         return (card % 13); //everything else
 }
-
-//for debugging purposes
-console.log(generatedCards);

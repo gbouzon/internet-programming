@@ -2,9 +2,12 @@
 //TODO 1: check if you really need all these methods
 
 //initializing variables
-var generatedCards = []; //to store cards already in game
 
-var playerIndex, dealerIndex; //stores nb of cards dealt for each
+//to store cards already in the game
+var generatedCards = []; 
+
+//to store nb of cards dealt for each
+var playerIndex, dealerIndex;
 playerIndex = dealerIndex = 0;
 
 var dealerScore, playerScore;
@@ -18,10 +21,11 @@ function createCardElement(card, id, index) {
         //creating a new image element to add next card
         var newImg = document.createElement("img");
         //setting the id to the current index + 1
-        newImg.setAttribute("id", id + ++index);
+        newImg.setAttribute("id", id + index);
         //adding image to the page
         document.getElementById(id + "Hand").appendChild(newImg);  
     }
+    //console.log("image added:" + document.getElementById(id + "Hand").innerHTML);
     document.getElementById(id + index).setAttribute("src", "img/" + card + ".png");
     document.getElementById(id + index).setAttribute("width", "107");
     document.getElementById(id + index).setAttribute("height", "98");  
@@ -32,7 +36,6 @@ function deal() {
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     createCardElement(generateRandomCard(), "player", ++playerIndex);
     //updating scores
-    //TODO 2: make this more efficient if you got some time
     playerScore += getCardValue(generatedCards[0]);
     playerScore += getCardValue(generatedCards[1]);
 
@@ -91,15 +94,17 @@ function completeDealerHand() {
     var card = generateRandomCard();
     //disable buttons
     disableButtons();
-    while (dealerScore <= 16) {
+    if (dealerScore <= 16) {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
         //display score
         document.getElementById("dealerLabel").innerHTML = "Dealer: " + dealerScore + " points.";
-        isValid(dealerScore);
+        completeDealerHand();
     }
-    if (dealerScore <= 21)
+    else if (dealerScore <= 21)
         compareScores();
+
+    isValid(dealerScore);
 }
 
 function isValid(total) {
@@ -140,12 +145,10 @@ function compareScores() {
 }
 
 function removeImgs(id, index) {
-  //trial 1, refactor later
-  while (index > 1) {
-    var img = document.getElementById(id + index);
-    img.remove();
-    index--;
-  }
+    for (var i = index; i > 1; i--) {
+        console.log("test" + id + i);
+        document.getElementById(id + i).remove();
+    }
 }
 
 function tie() {
@@ -154,10 +157,14 @@ function tie() {
   removeImgs("player", playerIndex);
   //deleting all dealer's cards
   removeImgs("dealer", dealerIndex);
+
+  
   
   //generate one more card for each and the card with the highest value will define the winner
   var playerCard = generateRandomCard();
+  console.log(playerCard);
   var dealerCard = generateRandomCard();
+  console.log(dealerCard);
 
   //player
   document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");

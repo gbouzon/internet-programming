@@ -168,11 +168,11 @@ function win(score) {
     disableButtons();
 
     if (score === playerScore) {
-        document.getElementById("playerLabel").innerHTML += " has won the game";
+        document.getElementById("playerLabel").innerHTML = " Player has won the game";
         document.getElementById("playerLabel").style.color = "green"; 
     }
     else if (score === dealerScore) {
-        document.getElementById("dealerLabel").innerHTML += " has won the game"; 
+        document.getElementById("dealerLabel").innerHTML = " Dealer has won the game"; 
         document.getElementById("dealerLabel").style.color = "green"; 
     }
 }
@@ -195,28 +195,29 @@ function removeImgs(id, index) {
  * @returns compareScores() - checks which card is the highest.
  */
 function tie() {
-  //deleting all player's cards
-  removeImgs("player", playerIndex);
+    console.log("tie");
+    //deleting all player's cards
+    removeImgs("player", playerIndex);
 
-  //deleting all dealer's cards
-  removeImgs("dealer", dealerIndex);
+    //deleting all dealer's cards
+    removeImgs("dealer", dealerIndex);
 
-  //generate one more card for each 
-  var playerCard = generateRandomCard();
-  var dealerCard = generateRandomCard();
+    //generate one more card for each 
+    var playerCard = generateRandomCard();
+    var dealerCard = generateRandomCard();
 
-  //player
-  document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");
-  playerScore = getCardValue(playerCard);
-  document.getElementById("playerScore").innerHTML = "Score: " + playerScore + " points.";
+    //player
+    document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");
+    playerScore = getCardValue(playerCard);
+    document.getElementById("playerScore").innerHTML = "Score: " + playerScore + " points.";
 
-  //dealer
-  document.getElementById("dealer1").setAttribute("src", "img/" + dealerCard + ".png");
-  dealerScore = getCardValue(dealerCard);
-  document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
+    //dealer
+    document.getElementById("dealer1").setAttribute("src", "img/" + dealerCard + ".png");
+    dealerScore = getCardValue(dealerCard);
+    document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
   
-  //check which card is closer to 21
-  return compareScores();
+    //check which card is closer to 21
+    return compareScores();
 }
 
 /** 

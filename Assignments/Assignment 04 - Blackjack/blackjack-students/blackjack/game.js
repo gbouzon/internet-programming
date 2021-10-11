@@ -122,7 +122,7 @@ function completeDealerHand() {
     }
 
     generatedCards.pop(); //because it adds an extra card that never gets used, check line 109
-    return isScoreValid(dealerScore);
+    isScoreValid(dealerScore);
 }
 
 /**
@@ -144,8 +144,7 @@ function compareScores() {
  * @returns true if score < 21 and a lose/win if not.
  */
 function isScoreValid(score) {
-    if (score < 21) return true;
-    else if (score > 21) return lose(score);
+    if (score > 21) return lose(score);
     else if (score == 21) return win(score);
 }
 

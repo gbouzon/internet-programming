@@ -2,35 +2,16 @@
 
 //initializing variables
 
-//to store cards already in the game
-var generatedCards = []; 
-
 //to store nb of cards dealt for each
 var playerIndex, dealerIndex;
 playerIndex = dealerIndex = 0;
 
-//to store score
+//to store scores
 var dealerScore, playerScore;
 dealerScore = playerScore = 0;
 
-/** 
- * Creates an image element (where needed) and displays the corresponding card.
- * @param {number} card - the number generated from the 52-card deck.
- * @param {string} id - "player" or "dealer".
- * @param {number} index - number of cards dealt for specified player.
- * @returns {void}
- */
-function createCardElement(card, id, index) {
-    if (index > 2) { 
-        //creating a new image element to add next card.
-        var newImg = document.createElement("img");
-        //setting the img id to id + index (eg. player1, dealer1).
-        newImg.setAttribute("id", id + index);
-        //adding image to the page.
-        document.getElementById(id + "Hand").appendChild(newImg);  
-    }
-    document.getElementById(id + index).setAttribute("src", "img/" + card + ".png");
-}
+//to store cards already in the game
+var generatedCards = []; 
 
 /**
  * Generates two random cards for the player and two random cards for the dealer.
@@ -73,8 +54,27 @@ function generateRandomCard(min = 1, max = 52) {
         generatedCards.push(card); 
         return card;
     }
-    else 
-        return generateRandomCard();  
+
+    return generateRandomCard();  
+}
+
+/** 
+ * Creates an image element (where needed) and displays the corresponding card.
+ * @param {number} card - the number generated from the 52-card deck.
+ * @param {string} id - "player" or "dealer".
+ * @param {number} index - number of cards dealt for specified player.
+ * @returns {void}
+ */
+ function createCardElement(card, id, index) {
+    if (index > 2) { 
+        //creating a new image element to add next card.
+        var newImg = document.createElement("img");
+        //setting the img id to id + index (eg. player1, dealer1).
+        newImg.setAttribute("id", id + index);
+        //adding image to the page.
+        document.getElementById(id + "Hand").appendChild(newImg);  
+    }
+    document.getElementById(id + index).setAttribute("src", "img/" + card + ".png");
 }
 
 /** 
@@ -110,6 +110,7 @@ function completeDealerHand() {
     disableButtons();
     var card = generateRandomCard();
 
+    //continues generating cards until dealer's score reaches 17
     if (dealerScore <= 16) {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
@@ -143,20 +144,7 @@ function compareScores() {
 function isScoreValid(score) {
     if (score < 21) return true;
     else if (score > 21) return lose(score);
-    else if (score === 21) return win(score);
-}
-
-/**
- * **Refactor & delete this method pls.**
- * Checks which player has the losing score.
- * @param {number} score - the losing score.
- * @returns a win for the player who doesn't have the losing score.
- */
-function lose(score) {
-    if (score === playerScore)
-        return win(dealerScore);
-    else if (score === dealerScore)
-        return win(playerScore);
+    else if (score == 21) return win(score);
 }
 
 /**
@@ -167,14 +155,27 @@ function lose(score) {
 function win(score) {
     disableButtons();
 
-    if (score === playerScore) {
+    if (score == playerScore) {
         document.getElementById("playerLabel").innerHTML = " Player has won the game";
+        //the green highlight was ugly so I changed the colour of the text instead.
         document.getElementById("playerLabel").style.color = "green"; 
     }
-    else if (score === dealerScore) {
+    else if (score == dealerScore) {
         document.getElementById("dealerLabel").innerHTML = " Dealer has won the game"; 
         document.getElementById("dealerLabel").style.color = "green"; 
     }
+}
+
+/**
+ * Checks which player has the losing score.
+ * @param {number} score - the losing score.
+ * @returns a win for the player who doesn't have the losing score.
+ */
+ function lose(score) {
+    if (score == playerScore)
+        return win(dealerScore);
+    else if (score == dealerScore)
+        return win(playerScore);
 }
 
 /**
@@ -196,12 +197,21 @@ function removeImgs(id, index) {
  */
 function tie() {
     console.log("tie");
-    //deleting all player's cards
-    removeImgs("player", playerIndex);
+    console.log("generating one random card for each player.");
 
-    //deleting all dealer's cards
-    removeImgs("dealer", dealerIndex);
+    //if the card generated is of the same value for both, this method will be called again
+    //since there will be only one image element I don't need to go through this process again
+    if (playerIndex && dealerIndex > 1) {
+        console.log("in the if"); //debugging +1
+        //deleting all player's cards
+        removeImgs("player", playerIndex);
+        console.log(document.getElementById("playerHand").innerHTML);
 
+        //deleting all dealer's cards
+        removeImgs("dealer", dealerIndex);
+        console.log(document.getElementById("dealerHand").innerHTML);
+    }
+    
     //generate one more card for each 
     var playerCard = generateRandomCard();
     var dealerCard = generateRandomCard();

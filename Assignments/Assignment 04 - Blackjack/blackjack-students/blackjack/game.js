@@ -1,5 +1,3 @@
-//TODO: REFACTOR & DELETE LOSE() METHOD
-
 //initializing variables
 
 //to store nb of cards dealt for each
@@ -196,34 +194,22 @@ function removeImgs(id, index) {
  * @returns compareScores() - checks which card is the highest.
  */
 function tie() {
-    console.log("tie");
-    console.log("generating one random card for each player.");
-
-    console.log(document.getElementById("playerHand").innerHTML);
-    console.log(document.getElementById("dealerHand").innerHTML);
-
     //if the card generated is of the same value for both, this method will be called again
     //since there will be only one image element I don't need to go through this process again
     if (playerIndex && dealerIndex > 1) {
-        console.log("in the if"); //debugging +1
         //deleting all player's cards
         removeImgs("player", playerIndex);
-        console.log(document.getElementById("playerHand").innerHTML);
 
         //deleting all dealer's cards
         removeImgs("dealer", dealerIndex);
-        console.log(document.getElementById("dealerHand").innerHTML);
-
+        
+        //setting index to 1, since each player only has one card now
         dealerIndex = playerIndex = 1;
     }
     
-    
-
     //generate one more card for each 
     var playerCard = generateRandomCard();
     var dealerCard = generateRandomCard();
-
-    
 
     //player
     document.getElementById("player1").setAttribute("src", "img/" + playerCard + ".png");
@@ -234,9 +220,6 @@ function tie() {
     document.getElementById("dealer1").setAttribute("src", "img/" + dealerCard + ".png");
     dealerScore = getCardValue(dealerCard);
     document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
-
-    console.log(document.getElementById("playerHand").innerHTML);
-    console.log(document.getElementById("dealerHand").innerHTML);
   
     //check which card is closer to 21
     return compareScores();

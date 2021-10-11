@@ -90,7 +90,7 @@ function requestPlayerCard() {
 }
 
 /** 
- * Disables buttons draw and hold.
+ * Disables buttons "draw 1 more card" and "hold".
  * @returns {void}
  */
 function disableButtons() {
@@ -113,12 +113,16 @@ function completeDealerHand() {
         createCardElement(card, "dealer", ++dealerIndex);
         dealerScore += getCardValue(card);
         document.getElementById("dealerScore").innerHTML = "Score: " + dealerScore + " points.";
-        completeDealerHand();
+        return completeDealerHand();
     }
-    else if (dealerScore <= 21)
-        compareScores();
+    
+    else if (dealerScore < 21) {
+        generatedCards.pop(); //because it adds an extra card that never gets used, check line 109
+        return compareScores();
+    }
 
-    isScoreValid(dealerScore);
+    generatedCards.pop(); //because it adds an extra card that never gets used, check line 109
+    return isScoreValid(dealerScore);
 }
 
 /**
@@ -148,7 +152,7 @@ function isScoreValid(score) {
 /**
  * Checks which player has the winning score and updates related functionalities.
  * @param {number} score - the winning score to be checked (either the player's or the dealer's).
- * @return {void}
+ * @returns {void}
  */
 function win(score) {
     disableButtons();
@@ -180,7 +184,7 @@ function win(score) {
  * Removes all but one images from the specified HTML element.
  * @param {string} id - "player" or "dealer"
  * @param {number} index - number of cards dealt for specified player.
- * @return {void}
+ * @returns {void}
  */
 function removeImgs(id, index) {
     for (var i = index; i > 1; i--) 
@@ -202,7 +206,7 @@ function tie() {
 
         //deleting all dealer's cards
         removeImgs("dealer", dealerIndex);
-        
+
         //setting index to 1, since each player only has one card now
         dealerIndex = playerIndex = 1;
     }

@@ -27,3 +27,9 @@ Javascript labs & demos done in class
     Demo on objects part 2: constructors. <br>
     Demo on using canvas - drawing circles, rectangles, lines as well as animating objects (by redrawing them at an interval).
 </p>
+
+### 5. Lab 05 - Regular Expressions:
+
+<p> 
+    Notes on Regular Expressions with specificities to RegExp in JavaScript.
+</p>

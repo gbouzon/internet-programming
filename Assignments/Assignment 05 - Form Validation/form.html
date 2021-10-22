@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Forms</title>
+		<script src="script.js"></script>
+		<style>
+			label{
+				display:inline-block;
+				width: 150px;
+				/*border: solid red;*/
+				margin-bottom: 15px;
+			}
+			label.option{
+				width: 70px;
+			}
+			input{
+				
+			}
+		</style>
+	</head>
+	<body>
+		<form action="" method="get">
+			<label>Enter First Name:</label>
+			<input id="fName" type="text" name="first_name">
+			<br>
+			
+			<label>Enter Last Name:</label>
+			<input id="lName" name="last_name">
+			<br>
+			
+			<label>Enter Username:</label>
+			<input type="text" name="username">
+			<br>
+			
+			<label>Enter Password:</label>
+			<input type="password" name="pswd">
+			<br>
+			
+			<label>Enter EMail:</label>
+			<input type="text" name="email">
+			<br>
+			
+			<label>Gender:</label>
+			<input type="radio" name="gender" value="M"><label class="option">Male</label>
+			<input type="radio" name="gender" value="F"><label class="option">Female</label>
+			<br>
+			
+			<label>Pets:</label>
+			<input type="checkbox" value="birds" name ="pets"><label class="option">Birds</label>
+			<input type="checkbox" value="cats" name ="pets"><label class="option">Cats</label>
+			<input type="checkbox" value="dogs" name ="pets"><label class="option">Dogs</label>
+			<input type="checkbox" value="tigers" name ="pets"><label class="option">Tigers</label>
+			<input type="checkbox" value="alligators" name ="pets"><label class="option">Alligators</label>
+			<br>
+			
+			<label>Comments:</label>
+			<textarea placeholder="Enter text..." name="comments"></textarea>
+			<br>
+			
+			<label>Age:</label>
+			<select name="age" >
+				<option value="minor"><label>0-17</label></option>
+				<option value="adult"><label>18-64</label></option>
+				<option value="golden"><label>65+</label></option>
+			</select>
+			<br>
+			
+			<button type="button" onclick="getName();">Get Info</button>
+			<input type="button" value="Validate and Submit" onclick="validateForm();">
+			<br>
+			
+		</form>
+	</body>
+</html>

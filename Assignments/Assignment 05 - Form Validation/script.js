@@ -3,7 +3,7 @@
 
 function getCheckboxes() {
     var pets = document.querySelectorAll('input[name="pets"]:checked');
-    var petStr = "";
+    var petStr = ""; //declaring variable as String
 
     for (var i = 0; i < pets.length; i++)
         petStr += pets[i].value + " ";
@@ -27,12 +27,19 @@ function getName() {
 //test validation with nonsense
 //if any validation conditions fail, console.log()
 
-function validateName() {
+//make validate functions return true if tests pass and false if otherwise
+//validateForm() will only allow submission if all other validate functions return true
+//error messages ^^
+
+function validateName() { //since first name and last name rules are the same
+    //initial regex: ^[A-Z][]{0,15}$ - to be tested & refactored
     //criteria:
     //1. only letters
     //2. first letter is uppercase
     //3. {1,16}
     //4. dash allowed 
+    
+    //mb: uppercase if dash preceeds
 }
 
 function validatePassword() {
@@ -46,6 +53,8 @@ function validatePassword() {
 }
 
 function validateUsername() {
+    //initial regex: ^[a-zA-Z][a-zA-Z0-9_.]{0,15}$ - to be tested & erfactored
+
     //criteria:
     //1. alphanumerical
     //2.{6,16}
@@ -71,5 +80,8 @@ function validateEmail() {
 }
 
 function validateForm() {
+    //to be tested
+    if (validateName() && validateEmail() && validatePassword() && validateUsername())
+        document.getElementsByTagName("form")[0].submit(); 
     //form can only be submitted once all the previous functions return no error
 }

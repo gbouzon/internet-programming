@@ -1,15 +1,25 @@
 function show() {
+    //Window object (basically refers to the browser window - JS model)
+    //contains 3 methods mainly used for debugging: alert, confirm and prompt
     window.alert("Hello World");
+    //this is acceptable since Window is the default object for JavaScript
+    alert("Hello World"); 
+    //Document object (refers to the html document)
+    document.write("Hello World");
+    //can be used to create html elements:
+    document.write("<table>");
 }  
 
 //think before you code
 
 //notice the lack of a return type & of data type for variables 
 function changeTitle() {
+    //innerHTML property changes the content of the element (aka the inner html :))
     document.getElementById("ttl").innerHTML = "Title Changed";
 }
 
 function changeDiv() {
+    //getElementsByTagName returns a collection, so []
     var divElements = document.getElementsByTagName("div");
 
     for (var i = 0; i < divElements.length; i++) {
@@ -21,6 +31,8 @@ function changeDiv() {
 }
 
 function changeClass() {
+    //also returns a collection
+    //notice the cardinality of "elements"
     var myClasses = document.getElementsByClassName("text");
     for (var i = 0; i < myClasses.length; i++)
         myClasses[i].innerHTML = "Changed class text";

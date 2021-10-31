@@ -26,7 +26,22 @@
     that gives access and takes access to cookies depending on the website we're in -> Website A can only manage the cookies for Website A.
 </p>
 
+### Some More Info:
+ 
+- Cookies work in name-value pairs (name: value duh)
+- By default, a cookie will die as soon as the browser/website is closed (unless specified otherwise).
+- Only allowed one cookie per website
+
 ### Properties & Methods:
 
-- Cookies work in name-value pairs (name: value duh)
-- By default a cookie will die as soon as the browser/website is closed.
+- do this laters pls.
+
+### Limitations: 
+ 
+- Always do checks and verifications before dealing with cookies (basically some type of exception handling is needed)
+- We don't know what option our client will choose (meaning they could choose from a panoply of browser options/version, they could have their cookies disabled, etc.)
+- Make sure to make your code work no matter what - think of exceptional situations and possible errors (may lead to website crashing or not working at all).
+
+### Considerations:
+
+- Always delete the previous cookie when testing in the same file/website, so we don't get corrupted info that breaks our code. thanks.

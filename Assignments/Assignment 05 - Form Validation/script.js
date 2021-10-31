@@ -1,13 +1,10 @@
-//clean getCheckboxes and getName() when ya get some time pls
-//generalize this stuff laters
-
 /**
  * Retrieves the checked checkboxes from the 'pets' section
  * @returns a string containing the values of each checked checkbox
  */
 function getCheckboxes() {
     var pets = document.getElementsByName("pets");
-    var petStr = ""; //declaring variable as String. !undefined in case input is null
+    var petStr = ""; //declaring variable as String, !undefined in case input is null
 
     for (var i = 0; i < pets.length; i++)
         if (pets[i].checked)
@@ -66,40 +63,28 @@ function getName() {
     console.log("Age is: " + getAge());
 }
 
-//test validation with nonsense
-//if any validation conditions fail, console.log()
-
-//make validate functions return true if tests pass and false if otherwise
-//validateForm() will only allow submission if all other validate functions return true
-//error messages ^^
-
 /**
  * Checks if the entered strings in 'fName' and 'lName' sections of the form are valid according to preset conditions.
  * @returns true if valid and false if otherwise.
  */
-function validateName() { //clean laters
+function validateName() {
     var nameRegex = /^[A-Z](?!.*[-]$)(?!.*[-]{2})[\-a-zA-Z]{0,15}$/;
     //start with uppercase, negative lookahead to disallow dashes at the end, 
     //negative lookahead to disallow consecutive dashes
     //letters or dashes after first character
     //length must be between 1 and 16
     //todo: if time, disallow uppercase after first letter, except if preceding character is a dash
+
     var firstName = document.getElementById("fName").value;
     var lastName = document.getElementById("lName").value;
 
-    //for debugging, erase before submission pls and thank
-    console.log(firstName);
-    console.log(lastName);
-    console.log(nameRegex.test(firstName));
-    console.log(nameRegex.test(lastName));
-
-    if (nameRegex.test(firstName) == false) { 
+    if (!nameRegex.test(firstName)) { 
         console.log("First name is not valid.");
         document.getElementById("fName").value = "";
         return false;
     }
 
-    else if (nameRegex.test(lastName) == false) {
+    else if (!nameRegex.test(lastName)) {
         console.log("Last name is not valid.");
         document.getElementById("lName").value = "";
         return false;
@@ -113,17 +98,13 @@ function validateName() { //clean laters
  * @returns true if valid and false if otherwise.
  */
 function validateUsername() {
-    //initial regex: ^[a-zA-Z][a-zA-Z0-9_.]{0,15}$ - to be tested & refactored
-    var usernameRegex = /^(?![.])(?!.*[.]$)(?!.*[_.]{2})[a-zA-Z0-9._]{6,16}$/
+    var usernameRegex = /^(?![.])(?!.*[.]$)(?!.*[_.]{2})[a-zA-Z0-9._]{6,16}$/;
     //negative lookaheads to disallow usernames starting or ending with a .
     //negative lookahead to disallow consecutive _ .
     //alphanumerical characters and _, .
     //length between 6 and 16
-    var username = document.getElementsByName("username")[0].value;
 
-    //for debugging purposes
-    console.log(username);
-    console.log(usernameRegex.test(username));
+    var username = document.getElementsByName("username")[0].value;
 
     if (!usernameRegex.test(username)) {
         console.log("Username is not valid");
@@ -144,20 +125,16 @@ function validatePassword() {
     //positive lookahead to make sure there is at least 2 numbers
     //allows letters, numbers, ?, ! and .
     //length must be between 8 and 16
+
     var password = document.getElementsByName("pswd")[0].value;
     var firstName = document.getElementById("fName").value;
     var lastName = document.getElementById("lName").value;
+
     //checks if password contains either first or last name, case insensitive
     var containsFirstName = password.toLowerCase().includes(firstName.toLowerCase());
     var containsLastName = password.toLowerCase().includes(lastName.toLowerCase());
 
-    //for debugging purposes
-    console.log(password);
-    console.log(containsFirstName);
-    console.log(containsLastName);
-    console.log(passwordRegex.test(password));
-
-    if (passwordRegex.test(password) == false || containsFirstName || containsLastName) { 
+    if (!passwordRegex.test(password) || containsFirstName || containsLastName) { 
         console.log("Password is not valid.");
         document.getElementsByName("pswd")[0].value = "";
         return false;
@@ -166,14 +143,11 @@ function validatePassword() {
     return true;
 }
 
-
-
 /**
  * Checks if the entered string in 'email' section of the form is valid according to preset conditions.
  * @returns true if valid and false if otherwise.
  */
 function validateEmail() {
-    //further testing needed obv
     var emailRegex = /^[a-zA-Z](?!.*[-_.]{2})[a-zA-Z0-9-_.]{0,15}@[a-zA-Z]{2,24}((.qc)?.ca|.com)$/;
     //starts with a letter
     //negative lookahead do disallow consecutive -,. or _
@@ -181,13 +155,10 @@ function validateEmail() {
     //domain: must be preceded by a @
     //start with a letter and length between 2 and 24
     //extension must be .qc.ca, .ca or .com
+
     var email = document.getElementsByName("email")[0].value;
     
-    //for debugging, erase laters
-    console.log(email);
-    console.log(emailRegex.test(email));
-
-    if (emailRegex.test(email) == false) {
+    if (!emailRegex.test(email)) {
         console.log("Email is not valid.");
         document.getElementsByName("email")[0].value = "";
         return false;
@@ -201,8 +172,6 @@ function validateEmail() {
  * Validation of each field is done by specified methods.
  */
 function validateForm() {
-    //to be tested
-        if (validateName() && validateUsername() && validatePassword() && validateEmail())
-            document.getElementsByTagName("form")[0].submit(); 
-    //form can only be submitted once all the previous functions return no error
+    if (validateName() && validateUsername() && validatePassword() && validateEmail())
+        document.getElementsByTagName("form")[0].submit(); 
 }

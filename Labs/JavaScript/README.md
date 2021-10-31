@@ -37,14 +37,14 @@ Javascript labs & demos done in class
 ### 6. Lab 06 - XML & JSON:
 
 <p> 
-    Demo on using XML files.
+    Demo on using XML files. <br>
     Demo stringify() and parse() methods of the JSON class.
 </p>
 
 ### 7. Lab 07 - Cookies:
 
 <p> 
-    Notes on Cookies.
+    Notes on Cookies. <br>
     Demo on how to use cookies to manipulate a page using js objects and JSON class methods.
 </p>
 

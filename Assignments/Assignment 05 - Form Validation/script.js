@@ -89,8 +89,7 @@ function findIndices(substring, str) {
 //error messages ^^
 
 /**
- * Checks if the entered strings in 'fName' and 'lName' sections of the form are valid 
- * according to preset conditions.
+ * Checks if the entered strings in 'fName' and 'lName' sections of the form are valid according to preset conditions.
  * @returns true if valid and false if otherwise.
  */
 function validateName() { //clean laters
@@ -123,11 +122,40 @@ function validateName() { //clean laters
     return true;
 }
 
+/**
+ * Checks if the entered string in 'password' section of the form is valid according to preset conditions.
+ * @returns true if valid and false if otherwise.
+ */
 function validatePassword() {
+    var passwordRegex = /^(?=(.*[A-Z]){1})(?=(.*\d){2})[a-zA-Z0-9?!.]{8,16}$/;
+    //positive lookahead to make sure there is at least one capital letter
+    //positive lookahead to make sure there is at least 2 numbers
+    //allows letters, numbers, ?, ! and .
+    //length must be between 8 and 16
+    var password = document.getElementsByName("pswd")[0].value;
+    var firstName = document.getElementById("fName").value;
+    var lastName = document.getElementById("lName").value;
+    //checks if password contains either first or last name, case insensitive
+    var containsFirstName = password.toLowerCase().includes(firstName.toLowerCase());
+    var containsLastName = password.toLowerCase().includes(lastName.toLowerCase());
+
+    //for debugging purposes
+    console.log(password);
+    console.log(containsFirstName);
+    console.log(containsLastName);
+    console.log(passwordRegex.test(password));
+
+    if (passwordRegex.test(password) == false || containsFirstName || containsLastName) { 
+        console.log("Password is not valid.");
+        document.getElementsByName("pswd")[0].value = "";
+        return false;
+    }
+
+    return true;
     //criteria:
     //1. alphanumerical 
     //2.allow ?, ! and .
-    //3. must have at least one capital letter
+    //3. must have at least one capital letter [A-Z]+
     //4. {8,16}
     //5. does not contain first name NOR last name
     //6. must have at least 2 numbers
@@ -176,7 +204,7 @@ function validateEmail() {
  */
 function validateForm() {
     //to be tested
-        if (validateName() && validateEmail())
+        if (validateName() && validateEmail() && validatePassword())
             document.getElementsByTagName("form")[0].submit(); 
     //form can only be submitted once all the previous functions return no error
 }

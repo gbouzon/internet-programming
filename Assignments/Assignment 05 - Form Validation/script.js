@@ -66,21 +66,6 @@ function getName() {
     console.log("Age is: " + getAge());
 }
 
-/**
- * Finds all indices of a substring in a string and stores it in an array
- * @param {string} substring 
- * @param {string} str 
- * @returns a number array
- */
-function findIndices(substring, str) {
-    var indices = [];
-    for (var i = 0; i < str.length; i++)
-        if (str[i] === substring)
-            indices.push(i);
-    
-    return indices;
-}
-
 //test validation with nonsense
 //if any validation conditions fail, console.log()
 
@@ -152,13 +137,6 @@ function validatePassword() {
     }
 
     return true;
-    //criteria:
-    //1. alphanumerical 
-    //2.allow ?, ! and .
-    //3. must have at least one capital letter [A-Z]+
-    //4. {8,16}
-    //5. does not contain first name NOR last name
-    //6. must have at least 2 numbers
 }
 
 function validateUsername() {

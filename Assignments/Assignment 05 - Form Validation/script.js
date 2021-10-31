@@ -74,7 +74,6 @@ function validateName() {
     //negative lookahead to disallow consecutive dashes
     //letters or dashes after first character
     //length must be between 1 and 16
-    //todo: if time, disallow uppercase after first letter, except if preceding character is a dash
 
     var firstName = document.getElementById("fName").value;
     var lastName = document.getElementById("lName").value;

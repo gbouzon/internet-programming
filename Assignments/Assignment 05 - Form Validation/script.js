@@ -7,7 +7,7 @@
  */
 function getCheckboxes() {
     var pets = document.getElementsByName("pets");
-    var petStr = ""; //declaring variable as String
+    var petStr = ""; //declaring variable as String. !undefined in case input is null
 
     for (var i = 0; i < pets.length; i++)
         if (pets[i].checked)
@@ -80,7 +80,8 @@ function getName() {
 function validateName() { //clean laters
     var nameRegex = /^[A-Z](?!.*[-]$)(?!.*[-]{2})[\-a-zA-Z]{0,15}$/;
     //start with uppercase, negative lookahead to disallow dashes at the end, 
-    //negative lookahead to disallow consecutive dashes, letters or dashes after first character
+    //negative lookahead to disallow consecutive dashes
+    //letters or dashes after first character
     //length must be between 1 and 16
     //todo: if time, disallow uppercase after first letter, except if preceding character is a dash
     var firstName = document.getElementById("fName").value;
@@ -104,6 +105,32 @@ function validateName() { //clean laters
         return false;
     }
     
+    return true;
+}
+
+/**
+ * Checks if the entered string in the 'username' section of the form is valid according to preset conditions.
+ * @returns true if valid and false if otherwise.
+ */
+function validateUsername() {
+    //initial regex: ^[a-zA-Z][a-zA-Z0-9_.]{0,15}$ - to be tested & refactored
+    var usernameRegex = /^(?![.])(?!.*[.]$)(?!.*[_.]{2})[a-zA-Z0-9._]{6,16}$/
+    //negative lookaheads to disallow usernames starting or ending with a .
+    //negative lookahead to disallow consecutive _ .
+    //alphanumerical characters and _, .
+    //length between 6 and 16
+    var username = document.getElementsByName("username")[0].value;
+
+    //for debugging purposes
+    console.log(username);
+    console.log(usernameRegex.test(username));
+
+    if (!usernameRegex.test(username)) {
+        console.log("Username is not valid");
+        document.getElementsByName("username")[0].value = "";
+        return false;
+    }
+
     return true;
 }
 
@@ -139,14 +166,7 @@ function validatePassword() {
     return true;
 }
 
-function validateUsername() {
-    //initial regex: ^[a-zA-Z][a-zA-Z0-9_.]{0,15}$ - to be tested & refactored
 
-    //criteria:
-    //1. alphanumerical
-    //2.{6,16}
-    //3. allow _ and .
-}
 
 /**
  * Checks if the entered string in 'email' section of the form is valid according to preset conditions.
@@ -163,7 +183,7 @@ function validateEmail() {
     //extension must be .qc.ca, .ca or .com
     var email = document.getElementsByName("email")[0].value;
     
-    //for debuggin, erase laters
+    //for debugging, erase laters
     console.log(email);
     console.log(emailRegex.test(email));
 
@@ -182,7 +202,7 @@ function validateEmail() {
  */
 function validateForm() {
     //to be tested
-        if (validateName() && validateEmail() && validatePassword())
+        if (validateName() && validateUsername() && validatePassword() && validateEmail())
             document.getElementsByTagName("form")[0].submit(); 
     //form can only be submitted once all the previous functions return no error
 }

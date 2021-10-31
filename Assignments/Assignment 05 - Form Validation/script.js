@@ -68,8 +68,9 @@ function getName() {
  * @returns true if valid and false if otherwise.
  */
 function validateName() {
-    var nameRegex = /^[A-Z](?!.*[-]$)(?!.*[-]{2})[\-a-zA-Z]{0,15}$/;
-    //start with uppercase, negative lookahead to disallow dashes at the end, 
+    var nameRegex = /^[A-ZÁ-Ý](?!.*[-]$)(?!.*[-]{2})[\-a-zA-ZÀ-ÿ]{0,15}$/;
+    //start with uppercase (accented letters allowed)
+    //negative lookahead to disallow dashes at the end, 
     //negative lookahead to disallow consecutive dashes
     //letters or dashes after first character
     //length must be between 1 and 16

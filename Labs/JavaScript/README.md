@@ -53,3 +53,26 @@ Javascript labs & demos done in class
 <p> 
     Continuing Cookies' Demo: storing login form information in a cookie and accessing it during page reload.
 </p>
+
+### 9. Lab 09 - AJAX 01:
+
+<p> 
+    Notes on AJAX (ajax.md). <br>
+    Demo on using AJAX with 'GET' and 'POST' methods. <br>
+    Demo on server requests & XMLHttpRequest class. <br>
+</p>
+
+### 10. Lab 10 - AJAX 02:
+
+<p> 
+    Demo on working with AJAX using a REST API (reqres.in) -> actual server requests. <br>
+    Demo on how to get data from ^^ and display it on a page using JS ('GET' method example).
+</p> 
+
+### 11. Lab 11 - AJAX 03:
+
+<p> 
+    Demo on making a login form page & autheticating user login by checking existing users in reqres. <br>
+    Using 'POST' method. <br>
+    Redirecting user once 'token' is generated (check window.location.href).
+</p>

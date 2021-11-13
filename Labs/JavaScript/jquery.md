@@ -75,7 +75,7 @@
 - html() -> gets <i>or</i> sets the inner html of an element.
     <blockquote>
         Note: notice that in JQuery, we are provided with one method for both getter and setter functions. Depending on the arguments we pass in the method call, the interpreter decides which one should be used. Similar to properties in C#.
-    </blockquote> <br>
+    </blockquote> 
 
 - hide() -> hides specified element(s). Similar to changing CSS property 'display' to <i>none</i>. Does <b>not</b> erase element. For more info, check out: https://api.jquery.com/hide/#hide
 
@@ -87,13 +87,11 @@
     <blockquote>
         Note for post() and get(): specify url as first parameter.&nbsp;
         Second parameter: request respose from the server -> answers the question "what do I do with the server response?".
-    </blockquote> <br>
+    </blockquote> 
 
 - ajax() -> 
 
 - click() ->
-
-    <br>
 
 ## Some Examples:
 

@@ -40,8 +40,7 @@
 
 1. Simple Selector Forms:
     - Applies to all elements that match the specified one -> action performed by <code>p{}</code> in CSS or <code>\$("p")</code> in JQuery would apply to all \<p> elements in the document. <br>
-    Does the same thing as <code> document.getElementByTagName("p"); </code> in pure JavaScript.
-    <br>
+    Does the same thing as <code> document.getElementByTagName("p");</code> in pure JavaScript.
 
 2. Generic & Class Selectors:
     - Allows us to target group of elements (less repetition).
@@ -52,8 +51,7 @@
         <p class = "courses"></p>
         ```
         Actions performed by <code>.courses{}</code> in CSS or <code>\$(".courses")</code> in JQuery would apply to all elements belonging to class <i>courses</i> in the document (in this example, it would affect a \<h1> and a \<p> element). <br>
-        Does the same thing as <code> document.getElementsByClassName("courses"); </code> in pure JavaScript.
-        <br>
+        Does the same thing as <code>document.getElementsByClassName("courses");</code> in pure JavaScript. <br>
 
 3. ID Selectors:
     - Allows us to target specific elements (applies to one element only, since an ID cannot be duplicated).
@@ -62,8 +60,7 @@
         <h1 id = "title"></h1>
         ```
         Actions performed by <code>#title{}</code> in CSS or <code>\$("#title")</code> in JQuery would only apply to that one \<h1> element. <br>
-        Does the same thing as <code> document.getElementById("title"); </code> in pure JavaScript.
-        <br>
+        Does the same thing as <code>document.getElementById("title");</code> in pure JavaScript.<br>
 
 4. Universal Selector:
     - Applies to <b>all</b> elements in a document.
@@ -151,8 +148,6 @@
         $("p").hide();
     });
     ```
-    <br>
-
 ## Considerations:
 
 - Always check documentation and do research on JQuery functions before using them.

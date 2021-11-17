@@ -41,7 +41,7 @@
 1. Simple Selector Forms:
     - Applies to all elements that match the specified one -> action performed by <code>p{}</code> in CSS or <code>\$("p")</code> in JQuery would apply to all \<p> elements in the document. <br>
     Does the same thing as <code> document.getElementByTagName("p"); </code> in pure JavaScript.
-    <br> <br>
+    <br>
 
 2. Generic & Class Selectors:
     - Allows us to target group of elements (less repetition).
@@ -53,7 +53,7 @@
         ```
         Actions performed by <code>.courses{}</code> in CSS or <code>\$(".courses")</code> in JQuery would apply to all elements belonging to class <i>courses</i> in the document (in this example, it would affect a \<h1> and a \<p> element). <br>
         Does the same thing as <code> document.getElementsByClassName("courses"); </code> in pure JavaScript.
-        <br> <br>
+        <br>
 
 3. ID Selectors:
     - Allows us to target specific elements (applies to one element only, since an ID cannot be duplicated).
@@ -63,12 +63,17 @@
         ```
         Actions performed by <code>#title{}</code> in CSS or <code>\$("#title")</code> in JQuery would only apply to that one \<h1> element. <br>
         Does the same thing as <code> document.getElementById("title"); </code> in pure JavaScript.
-        <br> <br>
+        <br>
 
 4. Universal Selector:
     - Applies to <b>all</b> elements in a document.
     - Fairly useless, no one uses this.
     - Actions performed by <code>\*{}</code> in CSS or <code>$("*")</code> in JQuery applies to <b>everyone</b>. <br>
+
+5. Examples of selectors using attributes:
+    - <code>$("p:first")</code> -> selects the first \<p> element
+    - <code>$("ul li: first")</code> -> selects the first \<li> element of the first \<ul>
+    - <code>$("[href]")</code> -> selects all elements with an href attribute
 
 ## Some Methods & Properties:
 
@@ -85,13 +90,32 @@
 
 - get() -> Ajax using 'GET' method.
     <blockquote>
-        Note for post() and get(): specify url as first parameter.&nbsp;
+        Note for post() and get(): specify url as first parameter.
         Second parameter: request respose from the server -> answers the question "what do I do with the server response?".
     </blockquote> 
 
-- ajax() -> 
+- ajax() -> used to perform an ajax request (defines get and post using specific attributes).
 
-- click() ->
+- click() -> specifies an action to be performed when an element is clicked.
+
+- dblclick() -> similar to click() but with a double click action.
+
+- mouseenter() -> specifies an action to be performed when the mouse pointer enters an element.
+
+- mouseleave() -> specifies an action to be performed when the mouse pointer leaves an element.
+
+- hover() -> a combination of mouseenter() and mouseleave(). It takes 2 functions as a parameter (when mouse enters and mouse leaves).
+
+- mousedown() -> specifies an action to be performed when the left, middle or right mouse button is pressed.
+
+- mouseup() -> specifies an action to be performed when the left, middle or right mouse button is released.
+
+- on() -> attaches one or more event handlers for an element,
+    ```js
+    $("p").on("click dblclick mouseenter", function() {
+        $(this).hide();
+    });
+    ```
 
 ## Some Examples:
 

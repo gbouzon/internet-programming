@@ -19,3 +19,9 @@ Fall 2021. Repository for labs, assignments &amp; projects in internet programmi
     Package <b>HTML & CSS</b> contains exercises done in HTML and CSS labs (Forms and Index folders). <br>
     Package <b>JavaScript</b> contains exercises done in JavaScript labs. <br>
 </p>
+
+### 3. Notes:
+
+<p> 
+    Contains some of my notes on course content: AJAX, Cookies, JQuery & RegEx. <br>
+</p>

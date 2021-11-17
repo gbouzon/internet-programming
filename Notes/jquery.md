@@ -148,6 +148,18 @@
         $("p").hide();
     });
     ```
+8. get():
+     ```js
+    $.get("contact.php", function(data) {
+        alert("Data: " + data);
+    });
+    ```
+8. post():
+     ```js
+    $.post("contact.php", {fname: "ronald", lname: "raphael"}, function(result) {
+        $("#response").html(result);
+    });
+    ```
 ## Considerations:
 
 - Always check documentation and do research on JQuery functions before using them.

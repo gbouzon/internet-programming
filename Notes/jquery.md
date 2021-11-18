@@ -93,6 +93,8 @@
 
 - ajax() -> used to perform an ajax request (defines get and post using specific attributes).
 
+- getJSON() -> retrieve JSON data using an AJAX request
+
 - click() -> specifies an action to be performed when an element is clicked.
 
 - dblclick() -> similar to click() but with a double click action.

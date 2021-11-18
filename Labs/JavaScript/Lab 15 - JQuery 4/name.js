@@ -26,3 +26,4 @@ $(document).ready(function() {
         });
     });
 });
+//$("<tr></tr>") -> creates the element
